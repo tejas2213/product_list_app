@@ -46,18 +46,16 @@ The app uses **Riverpod** for state management with the following providers:
 ### Installation
 
 1. Clone the repository:
-```bash
-git clone 
+```
+git clone https://github.com/tejas2213/product_list_app.git
 ```
 
 2. Install dependencies:
 ```
-bash
 flutter pub get
 ```
 
 3. Run the app:
 ```
-bash
 flutter run
 ```
