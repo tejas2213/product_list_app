@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:product_list_app/models/product_model.dart';
+import 'package:product_list_app/views/product_detail_view.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../controllers/product_controller.dart';
-import 'product_detail_view.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
@@ -23,7 +23,7 @@ class HomeView extends ConsumerWidget {
           return _buildProductGrid(productResponse.products, context, ref);
         },
         loading: () => _buildLoadingGrid(),
-        error: (error, stackTrace) => _buildErrorState(error.toString()),
+        error: (error, stackTrace) => _buildErrorState(error.toString(), ref),
       ),
     );
   }
@@ -180,7 +180,7 @@ class HomeView extends ConsumerWidget {
     );
   }
 
-  Widget _buildErrorState(String error) {
+  Widget _buildErrorState(String error, WidgetRef ref) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -206,16 +206,20 @@ class HomeView extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Refresh the data by invalidating the provider
+              ref.invalidate(productListProvider);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
             ),
             child: const Text(
               'Try Again',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
         ],
