@@ -195,19 +195,9 @@ class HomeView extends ConsumerWidget {
               color: Colors.grey[700],
             ),
           ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Text(
-              error,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-          ),
           const SizedBox(height: 24),
           ElevatedButton(
             onPressed: () {
-              // Refresh the data by invalidating the provider
               ref.invalidate(productListProvider);
             },
             style: ElevatedButton.styleFrom(
